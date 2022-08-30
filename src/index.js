@@ -1,6 +1,7 @@
 const core = require('@actions/core')
 const conventionalRecommendedBump = require('conventional-recommended-bump')
 const path = require('path')
+const process = require('node:process')
 
 const getVersioning = require('./version')
 const git = require('./helpers/git')
@@ -25,6 +26,13 @@ async function handleVersioningByExtension(ext, file, versionPath, releaseType) 
 
 async function run() {
   try {
+
+    process.on('unhandledRejection', (reason, promise) => {
+      let error = `Unhandled Rejection at: ${promise} reason: ${reason}`
+      console.error(error)
+      core.setFailed(error)
+    });
+
     let gitCommitMessage = core.getInput('git-message')
     const gitUserName = core.getInput('git-user-name')
     const gitUserEmail = core.getInput('git-user-email')
