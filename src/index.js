@@ -27,7 +27,7 @@ async function run() {
   try {
 
     process.on('unhandledRejection', (reason, promise) => {
-      let error = `Unhandled Rejection at: ${promise} reason: ${reason}`
+      let error = `Unhandled Rejection occurred. Reason: ${reason.stack}`
       console.error(error)
       core.setFailed(error)
     });
