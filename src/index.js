@@ -1,7 +1,6 @@
 const core = require('@actions/core')
 const conventionalRecommendedBump = require('conventional-recommended-bump')
 const path = require('path')
-const process = require('node:process')
 
 const getVersioning = require('./version')
 const git = require('./helpers/git')
